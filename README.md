@@ -1,2 +1,2 @@
-# my_scripts
+# bio_scripts
 scripts often used in bioinformatics
