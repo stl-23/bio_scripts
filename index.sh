@@ -2,8 +2,8 @@
 $ref=$1
 $tool_name=$2
 $prefix=$3
-soft=./softwares.config
-tool=`grep $tool_name"=" $soft |cut -d '=' -f 2`
+soft=../softwares.config
+tool=`grep -w -F $tool_name"=" $soft |cut -d '=' -f 2`
 awk '/^>/&&NR>1{print "";}{ printf "%s",/^>/ ? $0"\n":$0.upper() }' $ref > $prefix.fa
 ####statistics####
 genome_size=`awk '$0 !~ /^>/{print length}' $prefix.fa |awk '{s+=$1}END{print s}'`
