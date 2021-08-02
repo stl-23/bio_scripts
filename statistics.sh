@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-$ref=$1
-$prefix=$2
+ref=$1
+prefix=$2
 awk '/^>/&&NR>1{print "";}{ printf "%s",/^>/ ? $0"\n":$0.upper() }' $ref > $prefix.fa
 ####statistics####
 genome_size=`awk '$0 !~ /^>/{print length}' $prefix.fa |awk '{s+=$1}END{print s}'`
@@ -16,7 +16,7 @@ echo -e "A:${A}\nT:${T}\nC:${C}\nG:${G}\nGC content(No N's):${GC_content}%\nTota
 #### build chr.list ####
 grep '>' $prefix.fa |sed 's/>//g' |awk '{split($0,a," "}' > $prefix"_chr.list"
 ####split genome####
-mkdir -p ./split_fa/  && cd ./split_fa/
+mkdir -p split_fa/  && cd split_fa/
 for i in `grep '>' ../$prefix.fa |sed 's/>//g'`;do echo $i > $i.txt && awk -F'>' 'NR==FNR{ids[$0]; next} NF>1{f=($2 in ids)} f' $i.txt ../$prefix.fa > $i.fa && rm *.txt;done
 
 
