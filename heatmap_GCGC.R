@@ -1,12 +1,8 @@
 library(pheatmap)
-args <- commandArgs(trailingOnly = TRUE)
-input_file <- args[1]
-anno_list <- args[2]
-out_file <- args[3]
-data <- read.table(input_file,header=T,row.names= 1)
-anno <- read.table(anno_list,header=T,row.names= 1)
+data <- read.table('input.list2.deal.addtitle',header=T,row.names= 1)
+anno <- read.table('annotation.list',header=T,row.names= 1)
 ann_colors <- list(CLASS = c(class1 = "#D95F02", class0 = "#6495ED"))
-pdf(out_file,width=12,height=8)
+pdf('GCGC_heatmap.pdf',width=12,height=8)
 exprTable_t <- as.data.frame(t(data))
 mat <- dist(exprTable_t)
 hclust_mat <- hclust(mat)
