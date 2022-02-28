@@ -3,7 +3,6 @@ data <- read.table('data.xls',header=T,row.names= 1)
 anno <- read.table('annotation.list',header=T,row.names= 1)
 #ann_colors <- list(CLASS = c(class1 = "#D95F02", class0 = "#189E77"))
 ann_colors <- list(CLASS = c(class1 = "#D95F02", class0 = "#6495ED"))
-pdf('GCGC_heatmap.pdf',width=12,height=8)
 exprTable_t <- as.data.frame(t(data))
 mat <- dist(exprTable_t)
 hclust_mat <- hclust(mat)
@@ -15,6 +14,7 @@ hclust_mat$order <- index
 #dend = reorder(as.dendrogram(hclust_mat), wts=order(match(manual_order, rownames(data))))
 #col_cluster <- as.hclust(dend)
 #col_cluster
+pdf('GCGC_heatmap.pdf',width=12,height=8)
 pheatmap(data, cluster_cols = hclust_mat,
          #color = colorRampPalette(c("#1B9E77", "white", "#D95F02"))(60), 
          color = colorRampPalette(c("#6495ED", "white", "#D95F02"))(60), 
